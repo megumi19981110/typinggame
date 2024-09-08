@@ -135,7 +135,7 @@
             'JavaScript',
             'document',
             'window',
-            'getEle,emtById',
+            'getElementById',
             'getElementsByClassName',
             'addEventListener'
         ];
@@ -143,7 +143,26 @@
         const entered = document.getElementById('entered');
         const remained = document.getElementById('remained');
         const inputText = document.getElementById('inputText');
-        
+
+        let remainedTextWords = remained.textContent.split('');
+        let enteredTextWords = [];
+
+        document.addEventListener('input',(e)=>{
+            if(remainedTextWords[0]===e.data){
+
+                enteredTextWords.push( remainedTextWords[0]);
+                remainedTextWords.shift();
+
+                console.log('========');
+                console.log('入力済み：'+enteredTextWords);
+                console.log('未入力：'+remainedTextWords);
+                console.log('========');
+
+            }else{
+                console.log('不正解');
+            }
+        });
+
     </script>
 </body>
 </html>
