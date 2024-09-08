@@ -121,16 +121,38 @@
         letter-spacing: 0.1em;
         text-align: center;
     }
+    .massage{
+        display: block;
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .button{
+        margin-top: 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    .hidden{
+        display: none;
+    }
     </style>
 </head>
 <body>
-    <div class="text-container">
+    <div id="game" class="text-container">
         <div class="question">
             <span id="entered" class="marker"></span>
             <span id="remained"></span>
         </div>
         <input type="text" class="text" id="inputText">
     </div>
+
+    <div id="massage" class="text-container hidden">
+        <div class="=massage">
+            ゲームクリア！お疲れ様でした！<br>
+            <button id="replayBtn" class="button">もう一度プレイする</button>
+        </div>
+    </div>
+
     <script>
         'use strict';
 
@@ -146,6 +168,9 @@
         const entered = document.getElementById('entered');
         const remained = document.getElementById('remained');
         const inputText = document.getElementById('inputText');
+        const game = document.getElementById('game');
+        const massage = document.getElementById('massage');
+        const replayBtn = document.getElementById('replayBtn');
 
         let remainedTextWords = remained.textContent.split('');
         let enteredTextWords = [];
@@ -179,7 +204,12 @@
             remained.textContent = remainedTextWords.join('');
 
             if(remainedTextWords.length <= 0){
-                setQuestion();
+                if(question.length <= 0){
+                    game.classList.add('hidden');
+                    massage.classList.remove('hidden');
+                }else{
+                    setQuestion();
+                }
             }
 
             }
