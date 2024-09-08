@@ -156,6 +156,9 @@
             currentKey = Math.floor( Math.random() * questions.length );
             currentText = questions[ currentKey ];
 
+            question.splice(currentKey,1);
+            console.log(question);
+
             entered.textContent = '';
             remained.textContent = currentText;
             inputText.value = '';
@@ -172,21 +175,13 @@
                 enteredTextWords.push( remainedTextWords[0]);
                 remainedTextWords.shift();
 
-                console.log('========');
-                console.log('入力済み：'+enteredTextWords);
-                console.log('未入力：'+remainedTextWords);
-                console.log('========');
-
             entered.textContent = enteredTextWords.join('');
             remained.textContent = remainedTextWords.join('');
 
             if(remainedTextWords.length <= 0){
-                console.log('クリア！全ての文字が入力されました');
                 setQuestion();
             }
 
-            }else{
-                console.log('不正解');
             }
         });
 
