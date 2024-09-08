@@ -118,12 +118,15 @@
         letter-spacing: 0.1em;
         text-align: center;
     }
+    .marker{
+        background-color: #91dbf1;
+    }
     </style>
 </head>
 <body>
     <div class="text-container">
         <div class="question">
-            <span id="entered" class="maker"></span>
+            <span id="entered" class="marker"></span>
             <span id="remained">JavaScript</span>
         </div>
         <input type="text" class="text" id="inputText">
@@ -157,6 +160,9 @@
                 console.log('入力済み：'+enteredTextWords);
                 console.log('未入力：'+remainedTextWords);
                 console.log('========');
+
+            entered.textContent = enteredTextWords.join('');
+            remained.textContent = remainedTextWords.join('');
 
             }else{
                 console.log('不正解');
