@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascriptで簡単なタイピングゲームを作ってみよう</title>
+    <title>JavaScriptで簡単なタイピングゲームを作ってみよう</title>
     <style>
         /*
     html5doctor.com Reset Stylesheet
@@ -112,14 +112,14 @@
         letter-spacing: 0.25em;
         text-align: center;
     }
+    .marker{
+        background: #91dbf1;
+    }
     .text{
         margin-top: 2rem;
         font-size: 2vw;
         letter-spacing: 0.1em;
         text-align: center;
-    }
-    .marker{
-        background-color: #91dbf1;
     }
     </style>
 </head>
@@ -149,6 +149,21 @@
 
         let remainedTextWords = remained.textContent.split('');
         let enteredTextWords = [];
+        let currentKey;
+        let currentText;
+
+        const setQuestion = () => {
+            currentKey = Math.floor( Math.random() * questions.length );
+            currentText = questions[ currentKey ];
+
+            entered.textContent = '';
+            remained.textContent = currentText;
+
+            enteredTextWords = [];
+            remainedTextWords = currentText,split('');
+        };
+        setQuestion();
+        
 
         document.addEventListener('input',(e)=>{
             if(remainedTextWords[0]===e.data){
