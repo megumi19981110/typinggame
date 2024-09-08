@@ -97,7 +97,10 @@
         vertical-align:middle;
     }
 
-    .text-container{
+    body {
+        font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    .text-container {
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -105,49 +108,65 @@
         justify-content: center;
         align-items: center;
     }
-    .question{
+    .text-container label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .question {
         display: flex;
         font-size: 4vw;
         font-weight: bold;
         letter-spacing: 0.25em;
         text-align: center;
     }
-    .marker{
+    .marker {
         background: #91dbf1;
     }
-    .text{
+    .text {
+        width: 100%;
+        border: none;
         margin-top: 2rem;
         font-size: 2vw;
         letter-spacing: 0.1em;
         text-align: center;
     }
-    .massage{
+    .text:focus, .text:focus-visible {
+        border: none;
+        outline: none;
+    }
+    .message {
         display: block;
         margin-top: 2rem;
         font-size: 1.5rem;
         text-align: center;
     }
-    .button{
+    .button {
         margin-top: 1rem;
         font-size: 1rem;
         cursor: pointer;
     }
-    .hidden{
+    .hidden {
         display: none;
     }
     </style>
 </head>
 <body>
     <div id="game" class="text-container">
+        <label for="inputText">
         <div class="question">
             <span id="entered" class="marker"></span>
             <span id="remained"></span>
         </div>
-        <input type="text" class="text" id="inputText">
+        <input type="text" class="text" id="inputText" autofocus>
+    </label>
     </div>
 
-    <div id="massage" class="text-container hidden">
-        <div class="=massage">
+    <div id="message" class="text-container hidden">
+        <div class="message">
             ゲームクリア！お疲れ様でした！<br>
             <button id="replayBtn" class="button">もう一度プレイする</button>
         </div>
@@ -156,7 +175,7 @@
     <script>
         'use strict';
 
-        const question = [
+        const questions = [
             'JavaScript',
             'document',
             'window',
@@ -169,7 +188,7 @@
         const remained = document.getElementById('remained');
         const inputText = document.getElementById('inputText');
         const game = document.getElementById('game');
-        const massage = document.getElementById('massage');
+        const message = document.getElementById('message');
         const replayBtn = document.getElementById('replayBtn');
 
         let remainedTextWords = remained.textContent.split('');
@@ -181,32 +200,31 @@
             currentKey = Math.floor( Math.random() * questions.length );
             currentText = questions[ currentKey ];
 
-            question.splice(currentKey,1);
-            console.log(question);
+            questions.splice(currentKey, 1);
 
             entered.textContent = '';
             remained.textContent = currentText;
             inputText.value = '';
 
             enteredTextWords = [];
-            remainedTextWords = currentText,split('');
+            remainedTextWords = currentText.split('');
         };
         setQuestion();
         
 
-        document.addEventListener('input',(e)=>{
-            if(remainedTextWords[0]===e.data){
+        document.addEventListener('input', (e) => {
+            if(remainedTextWords[0] === e.data){
 
-                enteredTextWords.push( remainedTextWords[0]);
+                enteredTextWords.push( remainedTextWords[0] );
                 remainedTextWords.shift();
 
             entered.textContent = enteredTextWords.join('');
             remained.textContent = remainedTextWords.join('');
 
             if(remainedTextWords.length <= 0){
-                if(question.length <= 0){
+                if(questions.length <= 0){
                     game.classList.add('hidden');
-                    massage.classList.remove('hidden');
+                    message.classList.remove('hidden');
                 }else{
                     setQuestion();
                 }
@@ -215,7 +233,7 @@
             }
         });
 
-        replayBtn.addEventListener('click',()=>{
+         replayBtn.addEventListener('click', () => {
             window.location.reload();
         });
 
